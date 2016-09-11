@@ -17,6 +17,17 @@ var Home = React.createClass({displayName: "Home",
 module.exports = Home;
 
 },{}],2:[function(require,module,exports){
+var Login = React.createClass( {displayName: "Login",
+  render: function (){
+    return (
+      React.createElement("p", null, "This is the login page")
+    )
+  }
+});
+
+module.exports = Login;
+
+},{}],3:[function(require,module,exports){
 var Projects = React.createClass({displayName: "Projects",
   render: function () {
     return (
@@ -82,23 +93,26 @@ var Row2 = React.createClass({displayName: "Row2",
 });
 module.exports = Projects;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var Home = require('./Home.jsx')
 var Projects = require('./Projects.jsx')
+var Login = require('./Login.jsx')
 
 var Main = React.createClass({displayName: "Main",
   getInitialState: function() {
-    return {data: []};
+    return {view: React.createElement(Home, null)}
   },
-
+  handleClick: function(value){
+    this.setState({view: value})
+  },
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement("div", {id: "Header"}, 
-          React.createElement(Header, null)
+        React.createElement("div", null, 
+          React.createElement(Header, {handleClick: this.handleClick})
         ), 
-        React.createElement("div", {id: "content"}, 
-          React.createElement(Projects, null)
+        React.createElement("div", null, 
+          this.state.view
         )
       )
     );
@@ -109,63 +123,74 @@ var Header = React.createClass({displayName: "Header",
   render: function () {
     return (
       React.createElement("div", null, 
-      React.createElement("nav", {className: "navbar navbar-inverse"}, 
-        React.createElement("div", {className: "container-fluid"}, 
-          React.createElement("div", {className: "navbar-header"}, 
-            React.createElement("button", {type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#myNavbar"}, 
-              React.createElement("span", {className: "icon-bar"}), 
-              React.createElement("span", {className: "icon-bar"}), 
-              React.createElement("span", {className: "icon-bar"})
+        React.createElement("nav", {className: "navbar navbar-inverse"}, 
+          React.createElement("div", {className: "container-fluid"}, 
+            React.createElement("div", {className: "navbar-header"}, 
+              React.createElement("button", {type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#myNavbar"}, 
+                React.createElement("span", {className: "icon-bar"}), 
+                React.createElement("span", {className: "icon-bar"}), 
+                React.createElement("span", {className: "icon-bar"})
+              ), 
+              React.createElement(HomeButton, {handleClick: this.props.handleClick})
             ), 
-            React.createElement(HomeButton, null)
-          ), 
-          React.createElement("div", {className: "collapse navbar-collapse", id: "myNavbar"}, 
-            React.createElement(NavBar, null), 
-            React.createElement(LoginButton, null)
+            React.createElement("div", {className: "collapse navbar-collapse", id: "myNavbar"}, 
+              React.createElement(NavBar, {handleClick: this.props.handleClick}), 
+              React.createElement(LoginButton, {handleClick: this.props.handleClick})
+            )
           )
         )
       )
-    )
   ) }
 });
 
 var NavBar = React.createClass({displayName: "NavBar",
-  render: function() {
-    return(
+  render: function () {
+    return (
       React.createElement("ul", {className: "nav navbar-nav"}, 
-        React.createElement(ProjectsButton, null)
+        React.createElement(ProjectsButton, {handleClick: this.props.handleClick})
       )
     )
   }
 });
 
 var ProjectsButton = React.createClass({displayName: "ProjectsButton",
-  render: function() {
+  handleClick: function () {
+    this.props.handleClick(React.createElement(Projects, null))
+  },
+
+  render: function () {
     return(
-      React.createElement("li", null, React.createElement("a", {href: "#"}, "Projects"))
+      React.createElement("li", {onClick: this.handleClick}, React.createElement("a", null, "Projects"))
     )
   }
 });
 
 var HomeButton = React.createClass({displayName: "HomeButton",
-  render: function() {
+  handleClick: function () {
+    this.props.handleClick(React.createElement(Home, null))
+  },
+  render: function () {
     return(
-      React.createElement("a", {className: "navbar-brand", href: "#"}, "Matthew Tilton")
+      React.createElement("a", {className: "navbar-brand", onClick: this.handleClick}, "Matthew Tilton")
     )
   }
 });
 
 var LoginButton = React.createClass({displayName: "LoginButton",
-  render: function() {
+  handleClick: function () {
+    this.props.handleClick(React.createElement(Login, null))
+  },
+
+  render: function () {
     return(
       React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-        React.createElement("li", null, React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-log-in"}), " Login"))
+        React.createElement("li", {onClick: this.handleClick}, React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-log-in"}), " Login"))
       )
     )
   }
-})
+});
 
 
 ReactDOM.render(React.createElement(Main, null), document.getElementById('main'))
 
-},{"./Home.jsx":1,"./Projects.jsx":2}]},{},[3]);
+},{"./Home.jsx":1,"./Login.jsx":2,"./Projects.jsx":3}]},{},[4]);
