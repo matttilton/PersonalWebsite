@@ -20,12 +20,26 @@ module.exports = Home;
 var Login = React.createClass( {displayName: "Login",
   render: function (){
     return (
-      React.createElement("p", null, "This is the login page")
+      React.createElement("div", null, 
+        React.createElement("div", {className: "jumbotron"}, 
+          React.createElement("div", {className: "container text-center"}, 
+            React.createElement("h1", null, "Login"), 
+            React.createElement("div", null, 
+              React.createElement("input", {type: "text", placeholder: "Username"}), 
+              React.createElement("br", null), 
+              React.createElement("input", {type: "password", placeholder: "Password"}), 
+              React.createElement("br", null), 
+              React.createElement("input", {type: "submit", value: "Login"})
+            )
+          )
+        )
+      )
     )
   }
-});
+})
 
-module.exports = Login;
+
+module.exports = Login
 
 },{}],3:[function(require,module,exports){
 var Projects = React.createClass({displayName: "Projects",
@@ -66,10 +80,10 @@ var Row1 = React.createClass({displayName: "Row1",
       React.createElement("div", {className: "container-fluid bg-3 text-center"}, 
         React.createElement("br", null), 
         React.createElement("div", {className: "row"}, 
-          React.createElement(Project, {name: "PySteg", link: "https://github.com/matttilton/PySteg", image: "http://placehold.it/150x80?text=IMAGE"}), 
-          React.createElement(Project, {name: "EulerProjects", link: "https://github.com/matttilton/EulerProjects", image: "http://placehold.it/150x80?text=IMAGE"}), 
-          React.createElement(Project, {name: "Sgepong", link: "https://github.com/matttilton/Sgepong", image: "http://placehold.it/150x80?text=IMAGE"}), 
-          React.createElement(Project, {name: "IpScanner", link: "https://github.com/matttilton/IpScanner", image: "http://placehold.it/150x80?text=IMAGE"})
+          React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
+          React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
+          React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
+          React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"})
         )
       )
     )
@@ -82,7 +96,7 @@ var Row2 = React.createClass({displayName: "Row2",
       React.createElement("div", {className: "container-fluid bg-3 text-center"}, 
         React.createElement("br", null), 
         React.createElement("div", {className: "row"}, 
-          React.createElement(Project, {name: "This Site", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
+          React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
           React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
           React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"}), 
           React.createElement(Project, {name: "Empty", link: "#", image: "http://placehold.it/150x80?text=IMAGE"})

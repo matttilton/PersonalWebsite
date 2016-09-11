@@ -1,12 +1,14 @@
-from flask import Flask, render_template
+#Imports
+from flask import Flask, render_template, redirect, url_for, request
+
+#Initial setup
 app = Flask(__name__)
+
 
 @app.route('/')
 def Home():
-    return render_template('Home.html')
+    return render_template('Site.html')
 
-@app.route('/Projects')
-def Projects():
-    return render_template('Projects.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

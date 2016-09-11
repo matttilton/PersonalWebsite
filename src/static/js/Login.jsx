@@ -2,11 +2,25 @@
 var Login = React.createClass( {displayName: "Login",
   render: function (){
     return (
-      React.createElement("p", null, "This is the login page")
+      React.createElement("div", null, 
+        React.createElement("div", {className: "jumbotron"}, 
+          React.createElement("div", {className: "container text-center"}, 
+            React.createElement("h1", null, "Login"), 
+            React.createElement("div", null, 
+              React.createElement("input", {type: "text", placeholder: "Username"}), 
+              React.createElement("br", null), 
+              React.createElement("input", {type: "password", placeholder: "Password"}), 
+              React.createElement("br", null), 
+              React.createElement("input", {type: "submit", value: "Login"})
+            )
+          )
+        )
+      )
     )
   }
-});
+})
 
-module.exports = Login;
+
+module.exports = Login
 
 },{}]},{},[1]);

@@ -36,10 +36,10 @@ var Row1 = React.createClass({
       <div className='container-fluid bg-3 text-center'>
         <br />
         <div className='row'>
-          <Project name='PySteg' link='https://github.com/matttilton/PySteg' image='http://placehold.it/150x80?text=IMAGE' />
-          <Project name='EulerProjects' link='https://github.com/matttilton/EulerProjects' image='http://placehold.it/150x80?text=IMAGE' />
-          <Project name='Sgepong' link='https://github.com/matttilton/Sgepong' image='http://placehold.it/150x80?text=IMAGE' />
-          <Project name='IpScanner' link='https://github.com/matttilton/IpScanner' image='http://placehold.it/150x80?text=IMAGE' />
+          <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
+          <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
+          <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
+          <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
         </div>
       </div>
     )
@@ -52,7 +52,7 @@ var Row2 = React.createClass({
       <div className='container-fluid bg-3 text-center'>
         <br />
         <div className='row'>
-          <Project name='This Site' link='#' image='http://placehold.it/150x80?text=IMAGE' />
+          <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
           <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
           <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
           <Project name='Empty' link='#' image='http://placehold.it/150x80?text=IMAGE' />
