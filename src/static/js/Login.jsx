@@ -7,11 +7,10 @@ var Login = React.createClass( {displayName: "Login",
           React.createElement("div", {className: "container text-center"}, 
             React.createElement("h1", null, "Login"), 
             React.createElement("div", null, 
-              React.createElement("input", {type: "text", placeholder: "Username"}), 
+              React.createElement("input", {id: "username", type: "text", placeholder: "Username"}), 
               React.createElement("br", null), 
-              React.createElement("input", {type: "password", placeholder: "Password"}), 
-              React.createElement("br", null), 
-              React.createElement("input", {type: "submit", value: "Login"})
+              React.createElement("input", {id: "password", type: "text", placeholder: "Password"}), 
+              React.createElement(SubmitButton, {userChange: this.props.userChange})
             )
           )
         )
@@ -20,6 +19,32 @@ var Login = React.createClass( {displayName: "Login",
   }
 })
 
+var SubmitButton = React.createClass( {displayName: "SubmitButton",
+  getInitialState: function () {
+      return({message: ''})
+  },
+
+  handleClick: function () {
+    if (document.getElementById('username').value === 'admin') {
+      if (document.getElementById('password').value === 'admin') {
+        this.setState({message: 'Login successful'})
+        this.props.userChange('admin')
+      }
+    } else {
+      this.setState({message: 'Login failed'})
+    }
+  },
+
+  render: function () {
+    var message = ''
+    return(
+      React.createElement("div", null, 
+        React.createElement("p", null, this.state.message), 
+        React.createElement("input", {type: "submit", value: "Login", onClick: this.handleClick})
+      )
+    )
+  }
+})
 
 module.exports = Login
 

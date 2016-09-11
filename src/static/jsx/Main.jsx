@@ -4,7 +4,11 @@ var Login = require('./Login.jsx')
 
 var Main = React.createClass({
   getInitialState: function() {
-    return {view: <Home />}
+    return {view: <Home />,
+            username: ''}
+  },
+  userChange: function(value){
+    this.setState({username: value})
   },
   handleClick: function(value){
     this.setState({view: value})
@@ -13,7 +17,7 @@ var Main = React.createClass({
     return (
       <div>
         <div>
-          <Header handleClick={this.handleClick} />
+          <Header handleClick={this.handleClick} userChange={this.userChange} username={this.state.username} />
         </div>
         <div>
           {this.state.view}
@@ -35,11 +39,11 @@ var Header = React.createClass({
                 <span className='icon-bar'></span>
                 <span className='icon-bar'></span>
               </button>
-              <HomeButton handleClick={this.props.handleClick} />
+              <HomeButton handleClick={this.props.handleClick} username={this.props.username} />
             </div>
             <div className='collapse navbar-collapse' id='myNavbar'>
               <NavBar handleClick={this.props.handleClick} />
-              <LoginButton handleClick={this.props.handleClick} />
+              <LoginButton handleClick={this.props.handleClick} userChange={this.props.userChange} />
             </div>
           </div>
         </nav>
@@ -73,16 +77,23 @@ var HomeButton = React.createClass({
   handleClick: function () {
     this.props.handleClick(<Home />)
   },
+
   render: function () {
+    var username = this.props.username
+    if(username === ''){
+      username = 'Matthew Tilton'
+    } else {
+      username = this.props.username
+    }
     return(
-      <a className='navbar-brand' onClick={this.handleClick}>Matthew Tilton</a>
+      <a className='navbar-brand' onClick={this.handleClick}>{username}</a>
     )
   }
 });
 
 var LoginButton = React.createClass({
   handleClick: function () {
-    this.props.handleClick(<Login />)
+    this.props.handleClick(<Login userChange={this.props.userChange} />)
   },
 
   render: function () {

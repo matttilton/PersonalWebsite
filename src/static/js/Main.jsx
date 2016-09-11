@@ -25,11 +25,10 @@ var Login = React.createClass( {displayName: "Login",
           React.createElement("div", {className: "container text-center"}, 
             React.createElement("h1", null, "Login"), 
             React.createElement("div", null, 
-              React.createElement("input", {type: "text", placeholder: "Username"}), 
+              React.createElement("input", {id: "username", type: "text", placeholder: "Username"}), 
               React.createElement("br", null), 
-              React.createElement("input", {type: "password", placeholder: "Password"}), 
-              React.createElement("br", null), 
-              React.createElement("input", {type: "submit", value: "Login"})
+              React.createElement("input", {id: "password", type: "text", placeholder: "Password"}), 
+              React.createElement(SubmitButton, {userChange: this.props.userChange})
             )
           )
         )
@@ -38,6 +37,32 @@ var Login = React.createClass( {displayName: "Login",
   }
 })
 
+var SubmitButton = React.createClass( {displayName: "SubmitButton",
+  getInitialState: function () {
+      return({message: ''})
+  },
+
+  handleClick: function () {
+    if (document.getElementById('username').value === 'admin') {
+      if (document.getElementById('password').value === 'admin') {
+        this.setState({message: 'Login successful'})
+        this.props.userChange('admin')
+      }
+    } else {
+      this.setState({message: 'Login failed'})
+    }
+  },
+
+  render: function () {
+    var message = ''
+    return(
+      React.createElement("div", null, 
+        React.createElement("p", null, this.state.message), 
+        React.createElement("input", {type: "submit", value: "Login", onClick: this.handleClick})
+      )
+    )
+  }
+})
 
 module.exports = Login
 
@@ -114,7 +139,11 @@ var Login = require('./Login.jsx')
 
 var Main = React.createClass({displayName: "Main",
   getInitialState: function() {
-    return {view: React.createElement(Home, null)}
+    return {view: React.createElement(Home, null),
+            username: ''}
+  },
+  userChange: function(value){
+    this.setState({username: value})
   },
   handleClick: function(value){
     this.setState({view: value})
@@ -123,7 +152,7 @@ var Main = React.createClass({displayName: "Main",
     return (
       React.createElement("div", null, 
         React.createElement("div", null, 
-          React.createElement(Header, {handleClick: this.handleClick})
+          React.createElement(Header, {handleClick: this.handleClick, userChange: this.userChange, username: this.state.username})
         ), 
         React.createElement("div", null, 
           this.state.view
@@ -145,11 +174,11 @@ var Header = React.createClass({displayName: "Header",
                 React.createElement("span", {className: "icon-bar"}), 
                 React.createElement("span", {className: "icon-bar"})
               ), 
-              React.createElement(HomeButton, {handleClick: this.props.handleClick})
+              React.createElement(HomeButton, {handleClick: this.props.handleClick, username: this.props.username})
             ), 
             React.createElement("div", {className: "collapse navbar-collapse", id: "myNavbar"}, 
               React.createElement(NavBar, {handleClick: this.props.handleClick}), 
-              React.createElement(LoginButton, {handleClick: this.props.handleClick})
+              React.createElement(LoginButton, {handleClick: this.props.handleClick, userChange: this.props.userChange})
             )
           )
         )
@@ -183,16 +212,23 @@ var HomeButton = React.createClass({displayName: "HomeButton",
   handleClick: function () {
     this.props.handleClick(React.createElement(Home, null))
   },
+
   render: function () {
+    var username = this.props.username
+    if(username === ''){
+      username = 'Matthew Tilton'
+    } else {
+      username = this.props.username
+    }
     return(
-      React.createElement("a", {className: "navbar-brand", onClick: this.handleClick}, "Matthew Tilton")
+      React.createElement("a", {className: "navbar-brand", onClick: this.handleClick}, username)
     )
   }
 });
 
 var LoginButton = React.createClass({displayName: "LoginButton",
   handleClick: function () {
-    this.props.handleClick(React.createElement(Login, null))
+    this.props.handleClick(React.createElement(Login, {userChange: this.props.userChange}))
   },
 
   render: function () {

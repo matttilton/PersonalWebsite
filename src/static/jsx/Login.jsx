@@ -6,11 +6,10 @@ var Login = React.createClass( {
           <div className='container text-center'>
             <h1>Login</h1>
             <div>
-              <input type='text' placeholder='Username'></input>
+              <input id='username' type='text' placeholder='Username'></input>
               <br />
-              <input type='password' placeholder='Password'></input>
-              <br />
-              <input type='submit' value='Login'></input>
+              <input id='password' type='text' placeholder='Password'></input>
+              <SubmitButton userChange={this.props.userChange} />
             </div>
           </div>
         </div>
@@ -19,5 +18,31 @@ var Login = React.createClass( {
   }
 })
 
+var SubmitButton = React.createClass( {
+  getInitialState: function () {
+      return({message: ''})
+  },
+
+  handleClick: function () {
+    if (document.getElementById('username').value === 'admin') {
+      if (document.getElementById('password').value === 'admin') {
+        this.setState({message: 'Login successful'})
+        this.props.userChange('admin')
+      }
+    } else {
+      this.setState({message: 'Login failed'})
+    }
+  },
+
+  render: function () {
+    var message = ''
+    return(
+      <div>
+        <p>{this.state.message}</p>
+        <input type='submit' value='Login' onClick={this.handleClick}></input>
+      </div>
+    )
+  }
+})
 
 module.exports = Login
