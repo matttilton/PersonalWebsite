@@ -3,17 +3,21 @@ var Projects = require('./Projects.jsx')
 var Login = require('./Login.jsx')
 
 var Main = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {view: <Home />,
-            username: ''}
+            username: '',
+            logedin: false}
   },
-  userChange: function(value){
+
+  userChange: function (value) {
     this.setState({username: value})
   },
-  handleClick: function(value){
+
+  handleClick: function (value) {
     this.setState({view: value})
   },
-  render: function() {
+
+  render: function () {
     return (
       <div>
         <div>
@@ -23,9 +27,9 @@ var Main = React.createClass({
           {this.state.view}
         </div>
       </div>
-    );
+    )
   }
-});
+})
 
 var Header = React.createClass({
   render: function () {
@@ -43,13 +47,13 @@ var Header = React.createClass({
             </div>
             <div className='collapse navbar-collapse' id='myNavbar'>
               <NavBar handleClick={this.props.handleClick} />
-              <LoginButton handleClick={this.props.handleClick} userChange={this.props.userChange} />
+              <LoginButton handleClick={this.props.handleClick} userChange={this.props.userChange} username={this.props.username} />
             </div>
           </div>
         </nav>
       </div>
   ) }
-});
+})
 
 var NavBar = React.createClass({
   render: function () {
@@ -59,7 +63,7 @@ var NavBar = React.createClass({
       </ul>
     )
   }
-});
+})
 
 var ProjectsButton = React.createClass({
   handleClick: function () {
@@ -67,11 +71,11 @@ var ProjectsButton = React.createClass({
   },
 
   render: function () {
-    return(
+    return (
       <li onClick={this.handleClick}><a>Projects</a></li>
     )
   }
-});
+})
 
 var HomeButton = React.createClass({
   handleClick: function () {
@@ -80,30 +84,41 @@ var HomeButton = React.createClass({
 
   render: function () {
     var username = this.props.username
-    if(username === ''){
+    if (username === '') {
       username = 'Matthew Tilton'
     } else {
       username = this.props.username
     }
-    return(
+    return (
       <a className='navbar-brand' onClick={this.handleClick}>{username}</a>
     )
   }
-});
+})
 
 var LoginButton = React.createClass({
   handleClick: function () {
-    this.props.handleClick(<Login userChange={this.props.userChange} />)
+    if (this.props.username === '') {
+      this.props.handleClick(<Login userChange={this.props.userChange} handleClick={this.props.handleClick} />)
+    } else {
+      this.props.userChange('')
+    }
   },
 
   render: function () {
-    return(
-      <ul className='nav navbar-nav navbar-right'>
-        <li onClick={this.handleClick}><a href='#'><span className='glyphicon glyphicon-log-in'></span> Login</a></li>
-      </ul>
-    )
+    if (this.props.username === '') {
+      return (
+        <ul className='nav navbar-nav navbar-right'>
+          <li onClick={this.handleClick}><a href='#'><span className='glyphicon glyphicon-log-in'></span> Login</a></li>
+        </ul>
+      )
+    } else {
+      return (
+        <ul className='nav navbar-nav navbar-right'>
+          <li onClick={this.handleClick}><a href='#'><span className='glyphicon glyphicon-log-out'></span> Logout</a></li>
+        </ul>
+      )
+    }
   }
-});
-
+})
 
 ReactDOM.render(<Main />, document.getElementById('main'))

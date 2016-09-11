@@ -1,3 +1,5 @@
+var Home = require('./Home.jsx')
+
 var Login = React.createClass( {
   render: function (){
     return (
@@ -9,7 +11,7 @@ var Login = React.createClass( {
               <input id='username' type='text' placeholder='Username'></input>
               <br />
               <input id='password' type='text' placeholder='Password'></input>
-              <SubmitButton userChange={this.props.userChange} />
+              <SubmitButton userChange={this.props.userChange} changeView={this.props.handleClick} />
             </div>
           </div>
         </div>
@@ -28,6 +30,7 @@ var SubmitButton = React.createClass( {
       if (document.getElementById('password').value === 'admin') {
         this.setState({message: 'Login successful'})
         this.props.userChange('admin')
+        this.props.changeView(<Home />)
       }
     } else {
       this.setState({message: 'Login failed'})

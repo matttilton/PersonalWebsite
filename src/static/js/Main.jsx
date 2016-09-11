@@ -17,6 +17,8 @@ var Home = React.createClass({displayName: "Home",
 module.exports = Home;
 
 },{}],2:[function(require,module,exports){
+var Home = require('./Home.jsx')
+
 var Login = React.createClass( {displayName: "Login",
   render: function (){
     return (
@@ -28,7 +30,7 @@ var Login = React.createClass( {displayName: "Login",
               React.createElement("input", {id: "username", type: "text", placeholder: "Username"}), 
               React.createElement("br", null), 
               React.createElement("input", {id: "password", type: "text", placeholder: "Password"}), 
-              React.createElement(SubmitButton, {userChange: this.props.userChange})
+              React.createElement(SubmitButton, {userChange: this.props.userChange, changeView: this.props.handleClick})
             )
           )
         )
@@ -47,6 +49,7 @@ var SubmitButton = React.createClass( {displayName: "SubmitButton",
       if (document.getElementById('password').value === 'admin') {
         this.setState({message: 'Login successful'})
         this.props.userChange('admin')
+        this.props.changeView(React.createElement(Home, null))
       }
     } else {
       this.setState({message: 'Login failed'})
@@ -66,7 +69,7 @@ var SubmitButton = React.createClass( {displayName: "SubmitButton",
 
 module.exports = Login
 
-},{}],3:[function(require,module,exports){
+},{"./Home.jsx":1}],3:[function(require,module,exports){
 var Projects = React.createClass({displayName: "Projects",
   render: function () {
     return (
@@ -138,17 +141,21 @@ var Projects = require('./Projects.jsx')
 var Login = require('./Login.jsx')
 
 var Main = React.createClass({displayName: "Main",
-  getInitialState: function() {
+  getInitialState: function () {
     return {view: React.createElement(Home, null),
-            username: ''}
+            username: '',
+            logedin: false}
   },
-  userChange: function(value){
+
+  userChange: function (value) {
     this.setState({username: value})
   },
-  handleClick: function(value){
+
+  handleClick: function (value) {
     this.setState({view: value})
   },
-  render: function() {
+
+  render: function () {
     return (
       React.createElement("div", null, 
         React.createElement("div", null, 
@@ -158,9 +165,9 @@ var Main = React.createClass({displayName: "Main",
           this.state.view
         )
       )
-    );
+    )
   }
-});
+})
 
 var Header = React.createClass({displayName: "Header",
   render: function () {
@@ -178,13 +185,13 @@ var Header = React.createClass({displayName: "Header",
             ), 
             React.createElement("div", {className: "collapse navbar-collapse", id: "myNavbar"}, 
               React.createElement(NavBar, {handleClick: this.props.handleClick}), 
-              React.createElement(LoginButton, {handleClick: this.props.handleClick, userChange: this.props.userChange})
+              React.createElement(LoginButton, {handleClick: this.props.handleClick, userChange: this.props.userChange, username: this.props.username})
             )
           )
         )
       )
   ) }
-});
+})
 
 var NavBar = React.createClass({displayName: "NavBar",
   render: function () {
@@ -194,7 +201,7 @@ var NavBar = React.createClass({displayName: "NavBar",
       )
     )
   }
-});
+})
 
 var ProjectsButton = React.createClass({displayName: "ProjectsButton",
   handleClick: function () {
@@ -202,11 +209,11 @@ var ProjectsButton = React.createClass({displayName: "ProjectsButton",
   },
 
   render: function () {
-    return(
+    return (
       React.createElement("li", {onClick: this.handleClick}, React.createElement("a", null, "Projects"))
     )
   }
-});
+})
 
 var HomeButton = React.createClass({displayName: "HomeButton",
   handleClick: function () {
@@ -215,31 +222,42 @@ var HomeButton = React.createClass({displayName: "HomeButton",
 
   render: function () {
     var username = this.props.username
-    if(username === ''){
+    if (username === '') {
       username = 'Matthew Tilton'
     } else {
       username = this.props.username
     }
-    return(
+    return (
       React.createElement("a", {className: "navbar-brand", onClick: this.handleClick}, username)
     )
   }
-});
+})
 
 var LoginButton = React.createClass({displayName: "LoginButton",
   handleClick: function () {
-    this.props.handleClick(React.createElement(Login, {userChange: this.props.userChange}))
+    if (this.props.username === '') {
+      this.props.handleClick(React.createElement(Login, {userChange: this.props.userChange, handleClick: this.props.handleClick}))
+    } else {
+      this.props.userChange('')
+    }
   },
 
   render: function () {
-    return(
-      React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-        React.createElement("li", {onClick: this.handleClick}, React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-log-in"}), " Login"))
+    if (this.props.username === '') {
+      return (
+        React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
+          React.createElement("li", {onClick: this.handleClick}, React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-log-in"}), " Login"))
+        )
       )
-    )
+    } else {
+      return (
+        React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
+          React.createElement("li", {onClick: this.handleClick}, React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-log-out"}), " Logout"))
+        )
+      )
+    }
   }
-});
-
+})
 
 ReactDOM.render(React.createElement(Main, null), document.getElementById('main'))
 
