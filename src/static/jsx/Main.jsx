@@ -1,6 +1,7 @@
 var Home = require('./Home.jsx')
 var Projects = require('./Projects.jsx')
 var Login = require('./Login.jsx')
+var Calendar = require('fullcalendar')
 
 var Main = React.createClass({
   getInitialState: function () {
@@ -98,7 +99,7 @@ var HomeButton = React.createClass({
 var LoginButton = React.createClass({
   handleClick: function () {
     if (this.props.username === '') {
-      this.props.handleClick(<Login userChange={this.props.userChange} handleClick={this.props.handleClick} />)
+      this.props.handleClick(<Login userChange={this.props.userChange} handleClick={this.props.handel}/>)
     } else {
       this.props.userChange('')
     }

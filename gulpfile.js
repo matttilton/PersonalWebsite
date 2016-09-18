@@ -4,11 +4,13 @@ var gulpBrowser = require('gulp-browser')
 var reactify = require('reactify')
 var del = require('del')
 var size = require('gulp-size')
+var rename = require('gulp-rename')
 
 // tasks
 gulp.task('transform', function () {
-  var stream = gulp.src('./src/static/jsx/*.jsx')
+  var stream = gulp.src('./src/static/jsx/Main.jsx')
     .pipe(gulpBrowser.browserify({transform: ['reactify']}))
+    .pipe(rename('Main.js'))
     .pipe(gulp.dest('./src/static/js/'))
     .pipe(size())
   return stream

@@ -10,7 +10,7 @@ var Login = React.createClass( {
             <div>
               <input id='username' type='text' placeholder='Username'></input>
               <br />
-              <input id='password' type='text' placeholder='Password'></input>
+              <input id='password' type='password' placeholder='Password'></input>
               <SubmitButton userChange={this.props.userChange} changeView={this.props.handleClick} />
             </div>
           </div>
