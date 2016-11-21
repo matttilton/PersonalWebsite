@@ -1,6 +1,7 @@
 var Home = require('./Home.jsx')
 var Projects = require('./Projects.jsx')
 var Login = require('./Login.jsx')
+var Calendar = require('fullcalendar')
 
 var Main = React.createClass({
   getInitialState: function () {
