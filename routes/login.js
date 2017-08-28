@@ -17,7 +17,7 @@ passport.deserializeUser(function (user, done) {
 passport.use(new LocalStrategy(
     function (username, password, done) {
         var username = username.toLowerCase();
-        knex.select().from('Users').where({ username: username }).then(function (user) {
+        knex.select().from('users').where({ username: username }).then(function (user) {
             if (!user[0]) {
                 return done(null, false, { message: 'Incorrect username or password.' });
             }
