@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    nav(class="navbar navbar-inverse")
+        div(class="container-fluid")
+            div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+
+            div(class="collapse navbar-collapse" id="myNavbar")
+            ul(class="nav navbar-nav")
+                li(class="active")
+                    a(href="/") Home
+                li
+                    a(href='/Nodeflix') Nodeflix
+
+            ul(class="nav navbar-nav navbar-right")
+                li
+                    a(href="/Login/logout")
+                        span(class="glyphicon glyphicon-log-out")
+                        span  Logout
+
+        
+    div(class="container-fluid text-center")
+        div(class="row content")
+            div(class="col-sm-12 text-left")
+                h1 Welcome

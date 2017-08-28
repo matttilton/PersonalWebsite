@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    nav(class="navbar navbar-inverse")
+        div(class="container-fluid")
+            div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+
+            div(class="collapse navbar-collapse" id="myNavbar")
+            ul(class="nav navbar-nav")
+                li
+                    a(href="/") Home
+                li(class="active")
+                    a(href='/Nodeflix') Nodeflix
+
+            ul(class="nav navbar-nav navbar-right")
+                li
+                    a(href="/Login/logout")
+                        span(class="glyphicon glyphicon-log-out")
+                        span  Logout
+    div(id="root")
+        
+
+    script.
+        sortedepisodes = !{JSON.stringify(sortedepisodes)};
+        for(var each in sortedepisodes) {
+            $('<div>', {
+                id: each
+            }).appendTo('#root');
+            $('<h4>', {
+                text: 'Season ' + (parseInt(each) + 1)
+            }).appendTo('#' + each);
+            $('<ul>', {
+                id: each + 'list'
+            }).appendTo('#' + each);
+            for (var every in sortedepisodes[each]) {
+                $('<li>', {
+                    id: sortedepisodes[each][every].Season + '' + sortedepisodes[each][every].Number
+                }).appendTo('#' + each + 'list');
+                $('<a>', {
+                    text: "Episode " + sortedepisodes[each][every].Number + ' - ' + sortedepisodes[each][every].Name,
+                    href: '/Nodeflix/watch/episode/' + sortedepisodes[each][every].URL
+                }).appendTo('#' + sortedepisodes[each][every].Season + '' + sortedepisodes[each][every].Number)
+            }
+        }

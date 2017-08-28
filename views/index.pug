@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    nav(class="navbar navbar-inverse")
+        div(class="container-fluid")
+            div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+
+            div(class="collapse navbar-collapse" id="myNavbar")
+            ul(class="nav navbar-nav")
+                li(class="active")
+                    a(href="/") Home
+
+            ul(class="nav navbar-nav navbar-right")
+                li
+                    a(href="/Login")
+                        span(class="glyphicon glyphicon-log-in") Login
+
+        
+    div(class="container-fluid text-center")
+        div(class="row content")
+            div(class="col-sm-12 text-left")
+                h1 Welcome
+                p Dont see what your looking for? You probably need to login.

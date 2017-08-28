@@ -1,20 +1,24 @@
 {
-  "name": "personal-website",
-  "version": "1.0.0",
-  "description": "this is a small project aimed at creating a personal website",
-  "main": "index.js",
+  "name": "nodeflix",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "Matthew Tilton",
-  "license": "MIT",
-  "devDependencies": {
-    "bower": "^1.7.9",
-    "del": "^2.2.0",
-    "gulp": "^3.9.1",
-    "gulp-browser": "^2.1.4",
-    "gulp-rename": "^1.2.2",
-    "gulp-size": "^2.1.0",
-    "reactify": "^1.1.1"
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "deasync": "^0.1.10",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-session": "^1.15.4",
+    "knex": "^0.13.0",
+    "mariasql": "^0.2.6",
+    "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2"
   }
 }

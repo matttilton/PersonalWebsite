@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    link(href="/stylesheets/watch.css" rel="stylesheet")
+    //- script(src="http://vjs.zencdn.net/6.2.4/video.js")
+    
+    nav(class="navbar navbar-inverse")
+        div(class="container-fluid")
+            div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+
+            div(class="collapse navbar-collapse" id="myNavbar")
+            ul(class="nav navbar-nav")
+                li
+                    a(href="/") Home
+                li(class="active")
+                    a(href='/Nodeflix') Nodeflix
+
+            ul(class="nav navbar-nav navbar-right")
+                li
+                    a(href="/Login/logout")
+                        span(class="glyphicon glyphicon-log-out")
+                        span  Logout
+    center
+        video(id="videoplayer" class="video-js" controls preload="auto" data-setup='{}' width="1600" height="900")
+            source(src=src)
+
+    script.
+        document.getElementsByTagName('video')[0].volume = 0.05;
