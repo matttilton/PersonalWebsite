@@ -56,4 +56,8 @@ router.post('/Logout', function(req, res, next) {
     res.redirect('/');
 })
 
+router.get('/isLoggedIn', function(req, res, next) {
+    res.send(req.isAuthenticated());
+})
+
 module.exports = router;
